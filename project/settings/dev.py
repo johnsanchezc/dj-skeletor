@@ -36,10 +36,13 @@ try:
     INSTALLED_APPS += (
         'debug_toolbar',
     )
+    #https://github.com/django-debug-toolbar/django-debug-toolbar/issues/523
     DEBUG_TOOLBAR_CONFIG = {
         'INTERCEPT_REDIRECTS': False,
-        'SHOW_TOOLBAR_CALLBACK': lambda *args, **kwargs: True
+        'SHOW_TOOLBAR_CALLBACK': "%s.true" % __name__,
     }
+    def true(request):
+        return True
 except ImportError:
     pass
 
